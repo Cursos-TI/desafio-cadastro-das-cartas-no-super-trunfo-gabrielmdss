@@ -11,7 +11,7 @@ typedef struct {
 
 void cadastrarCarta(Carta *carta) {
     printf("Digite o nome do país: ");
-    scanf(" %[^\n]", carta->nome); // Lê nome com espaços
+    scanf(" %[^\n]", carta->nome);
 
     printf("Digite a população: ");
     scanf("%d", &carta->populacao);
@@ -24,6 +24,22 @@ void cadastrarCarta(Carta *carta) {
 
     printf("Digite a quantidade de pontos turísticos: ");
     scanf("%d", &carta->pontosTuristicos);
+}
+
+void calcularPropriedades(Carta *carta) {
+    float densidadePopulacional = (float)carta->populacao / carta->area;
+    float pibPerCapita = (float)carta->pib / carta->populacao;
+
+    printf("\nDensidade Populacional: %.2f\n", densidadePopulacional);
+    printf("PIB per Capita: %.2f\n", pibPerCapita);
+}
+
+void exibirCarta(Carta carta) {
+    printf("\nNome: %s\n", carta.nome);
+    printf("População: %d\n", carta.populacao);
+    printf("Área: %d km²\n", carta.area);
+    printf("PIB: %d milhões\n", carta.pib);
+    printf("Pontos Turísticos: %d\n", carta.pontosTuristicos);
 }
 
 void compararCartas(Carta cartaA, Carta cartaB) {
@@ -76,9 +92,13 @@ int main() {
 
     printf("Cadastro da Carta A:\n");
     cadastrarCarta(&cartaA);
+    calcularPropriedades(&cartaA);
+    exibirCarta(cartaA);
 
     printf("\nCadastro da Carta B:\n");
     cadastrarCarta(&cartaB);
+    calcularPropriedades(&cartaB);
+    exibirCarta(cartaB);
 
     printf("\nBem-vindo ao Super Trunfo de Países!\n");
     compararCartas(cartaA, cartaB);
